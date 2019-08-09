@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  position: relative;
 }
 /*=========== nav ============*/
 nav {
@@ -10,7 +11,11 @@ nav {
   color: white;
   padding: 10px;
   position: sticky;
+  position: -webkit-sticky;
+  top: 0; /* required */
+  z-index: 1000000;
   height: 60px;
+  overflow: hidden;
 }
 .navBtnCollection{
   position: absolute;
@@ -74,5 +79,17 @@ img{
 }
 
 .MovieListCard{
-  margin: auto;
+  margin: 10px auto;
+}
+.MovieFav{
+  position: absolute;
+  right: 30px;
+  top: 3px;
+  z-index: 100;
+}
+.MovieDelete{
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  z-index: 100;
 }

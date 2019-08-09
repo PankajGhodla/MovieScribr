@@ -16,7 +16,13 @@ class App extends React.Component<{}, IState>{
       <div>
         <Header/>
         <Main/>
-        <MovieList/>
+        <MovieList currentMovie="this is a test"/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
       </div>
     )
   }
