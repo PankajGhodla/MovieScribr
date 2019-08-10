@@ -7,7 +7,7 @@
 }
 *:focus {outline:none !important}
 body {
-  background-color: #BFBFBF;
+  background-color: #333333;
   min-width: 450px;
 }
 .pointer {
@@ -105,7 +105,7 @@ nav {
   border-radius: 20px;
   margin: auto;
   color: white;
-  background-color: #6B6B6B;
+  background-color: #222;
 }
 .MainhyperlinkIMBD{
   text-decoration: none;
@@ -139,7 +139,7 @@ nav {
 
 .MovieListCard{
   margin: 10px auto;
-  background-color: #6B6B6B;
+  background-color: #222;
   color: white;
 }
 .MovieFav{
@@ -175,7 +175,7 @@ nav {
   max-width: 1200px;
   margin: 10px auto;
   border-radius: 10px;
-  background-color: #6B6B6B;
+  background-color: #222;
   color: white;
 }
 
@@ -188,10 +188,23 @@ th {
 }
 .InputSearchHeading{
 }
-.InputSearchAddMovie{
+.InputSearchAddMovie input{
+  color: white !important;
 }
-.InputSearchSearch{
+.InputSearchAddMovie label{
+  color: white !important;
+}
+.InputSearchSearch input {
+  color: white !important ;
+  border: white;
 } 
+.InputSearchSearch label {
+  color: white !important ;
+} 
+::placeholder {
+  color: white;
+}
+
 @media screen and (max-width:750px) {
   table tr > *{
       display: block;
@@ -216,4 +229,5 @@ th {
 
 .displayText {
   text-align: center;
+  color: white;
 }
