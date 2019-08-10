@@ -23,10 +23,12 @@ class Facebook extends React.Component<{},IState>{
     }
     responseFacebook = (respose:any ) =>{
         console.log(respose);
-        this.setState({
-            isLoggedin: true,
-            name: respose.name
-        })
+        if (respose.name !== undefined){
+            this.setState({
+                isLoggedin: true,
+                name: respose.name
+            })
+        }
     }
     render(){
         let fbContent: any
