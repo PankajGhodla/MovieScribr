@@ -10,7 +10,6 @@ interface IState {
   updateListMethod: any,
   List: any,
   currentMovie: any,
-  hasloaded: boolean
 }
 
 class App extends React.Component<{}, IState>{
@@ -20,7 +19,6 @@ class App extends React.Component<{}, IState>{
       updateListMethod: null,
       List: [],
       currentMovie: 7,
-      hasloaded: false
     }   
   }
 
@@ -69,16 +67,11 @@ class App extends React.Component<{}, IState>{
 //         })
 // }
 
-componentDidMount =() =>{
-    this.setState({
-        hasloaded: true
-    })
-}
+
   render(){
     return(
 
-      <div>
-        {this.state.hasloaded?
+      
         <div>
         <Header/>
         <Main currentMovie={this.state.currentMovie}/>
@@ -90,8 +83,7 @@ componentDidMount =() =>{
         <br/>
         <br/>
         </div>
-        :'it hasnt loaded yet'}
-      </div>
+      
     )
   }
 }

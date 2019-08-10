@@ -74,7 +74,7 @@ class InputSearch extends React.Component<IProp,IState>{
             <thead>
             <tr>
                 <th>
-               <h1 className="InputSearchHeading"><span className="InputSearchGraphicOne">мσνιєѕ</span><span className="InputSearchGraphicTwo">ℓιѕтѕ</span></h1>
+               <h1 className="InputSearchHeading"><span className="InputSearchGraphicOne">мσνιєѕ</span><span className="InputSearchGraphicTwo">ℓιѕт</span></h1>
                </th>
 
                <th className="InputSearchAddMovie">

@@ -84,7 +84,7 @@ class Main extends React.Component<IProp,IState>{
                 
                 const output :any = []
                 response.forEach((realtedMovie:any)=>{
-                    const movie:any = (<Dropdown.Item href={realtedMovie.relatedImdblink}>{realtedMovie.relatedMovieTitle}</Dropdown.Item>)
+                    const movie:any = (<Dropdown.Item target="_blank" rel="noopener noreferrer" href={realtedMovie.relatedImdblink}>{realtedMovie.relatedMovieTitle}</Dropdown.Item>)
                     output.push(movie)
                 })
                 if (this.state.Related !== output){                    
