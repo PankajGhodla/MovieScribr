@@ -68,6 +68,7 @@ class App extends React.Component<{}, IState>{
 // }
   render(){
     return(
+
       <div>
         <Header/>
         <Main currentMovie={this.state.currentMovie}/>

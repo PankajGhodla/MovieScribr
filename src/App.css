@@ -8,9 +8,43 @@
 *:focus {outline:none !important}
 body {
   background-color: #BFBFBF;
-  min-width: 360px;
+  min-width: 450px;
+}
+.pointer {
+  cursor: pointer;
 }
 /*=========== nav ============*/
+#ytWidget {
+  width: 50px;
+  right: 120px;
+  top: -30px;
+  overflow: unset;
+  z-index: 10000 !important;
+  position: absolute;
+
+}
+#yt-widget .yt-listbox{
+  max-width: 300px !important;
+  overflow: scroll !important;
+  z-index: 1000000;
+}
+#ytWidget *{
+  position: absolute;
+  z-index: inherit;
+  max-width: 300px;
+  z-index: 1000000;
+}
+.button {
+  position: absolute;
+  right: 200px;
+  top: -2px;
+  color: white !important;
+  background-color: transparent !important;
+}
+.button a {
+  display: block;
+  width: 100%;
+}
 nav {
   width: 100%;
   background-color: #212121;
@@ -19,9 +53,8 @@ nav {
   position: sticky;
   position: -webkit-sticky;
   top: 0; /* required */
-  z-index: 1000000;
-  height: 60px;
-  overflow: hidden;
+  z-index: 100;
+  height: 70px;
 }
 .navBtnCollection{
   position: absolute;
@@ -30,7 +63,7 @@ nav {
   align-items: left;
 }
 .navBtn{
-  margin-left: 30px;
+  margin-left: 200px;
 }
 .navContainer{
   margin: auto;
@@ -40,10 +73,11 @@ nav {
 }
 
 /* ========= Main ==========*/
+
 .mainContainer{
   width: 100%;
   max-width: 1200px;
-  margin: 10px auto !important;
+  margin: 10px auto ;
   padding: 0px;
 }
 .mainImgContianer {
@@ -57,21 +91,30 @@ img{
   min-width: 300px;
   border-radius: 20px;
 }
-@media screen and (max-width: 600px) {
-  img{
-    width: 60%;
-    min-width: 200px;
-    border-radius: 20px;
-  }
-}
+
 .mainContentContainer{
   width: 100%;
   height: 100%;
   padding: 20px;
   border-radius: 20px;
-  margin: 10px auto;
+  margin: auto;
   color: white;
   background-color: #6B6B6B;
+}
+.MainhyperlinkIMBD{
+  text-decoration: none;
+  color: rgb(69, 184, 40);
+}
+.MainhyperlinkIMBD:hover{
+  color: rgb(69, 184, 40);
+}
+@media screen and (max-width: 600px) {
+  img{
+    width: 60%;
+    min-width: 200px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
 }
 /*==========MovieList===============*/
 .MovieListContainer{
@@ -95,17 +138,31 @@ img{
 }
 .MovieFav{
   position: absolute;
+  z-index: 10;
   right: 30px;
   top: 3px;
-  z-index: 100;
+  z-index: 1;
+}
+.MovieFav{
+  cursor: pointer;
 }
 .MovieDelete{
   position: absolute;
+  z-index: 10;
   right: 5px;
   top: 3px;
-  z-index: 100;
+  z-index: 1;
 }
-
+.MovieDelete:hover{
+  cursor: pointer;
+}
+.MovieListhyperlinkIMBD{
+  text-decoration: none;
+  color: rgb(69, 184, 40);
+}
+.MovieListhyperlinkIMBD:hover{
+  color: rgb(69, 184, 40);
+}
 /*=================Input Search=================*/
 .InputSearchTableContainer{
   width: 100%;

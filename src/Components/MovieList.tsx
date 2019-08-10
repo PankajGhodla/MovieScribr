@@ -37,16 +37,16 @@ class MovieList extends React.Component<IProp, IState>{
                 res.forEach((movie:any) => {
                     const movieCard = (
                         <Card key={movie.movieId} className="MovieListCard"style={{ width: '18rem' }}>
-                        <Delete onClick={()=> this.deleteMovie(movie.movieId)} className="MovieDelete"/>
-                        <span onClick={ ()=> this.handleLike(movie)}className="MovieFav">
+                        <Delete onClick={()=> this.deleteMovie(movie.movieId)} className="MovieDelete "/>
+                        <span onClick={ ()=> this.handleLike(movie)}className="MovieFav ">
                         {movie.isFavourite === true? <Fav/>: <FavOutline/>}
                         </span>
                                 <Card.Body>
-                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
+                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)} className="pointer">{movie.movieTitle}</Card.Title>
                                     <Card.Text>
                                     Release Date: {movie.releaseDate.substr(0,10)}
                                     <br/>
-                                    IMDB Link : <a href={movie.imdblink}>Check here</a>
+                                    IMDB Link : <a href={movie.imdblink} className="MovieListhyperlinkIMBD">Check here</a>
                                     </Card.Text>
                             </Card.Body>
                         </Card>)
@@ -77,11 +77,11 @@ class MovieList extends React.Component<IProp, IState>{
                         {movie.isFavourite === true? <Fav/>: <FavOutline/>}
                         </span>
                                 <Card.Body>
-                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
+                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)} className="pointer">{movie.movieTitle}</Card.Title>
                                     <Card.Text>
                                     Release Date: {movie.releaseDate.substr(0,10)}
                                     <br/>
-                                    IMDB Link : <a href={movie.imdblink}>Check here</a>
+                                    IMDB Link : <a href={movie.imdblink} className="MovieListhyperlinkIMBD">Check here</a>
                                     </Card.Text>
                             </Card.Body>
                         </Card>)

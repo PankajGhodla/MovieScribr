@@ -107,7 +107,7 @@ class Main extends React.Component<IProp,IState>{
                     <Row>
                         <Col md ="6" sm="12" className="mainImgContianer">
                             <div >
-                                <img alt='Poster of {this.state.Title}'src ={this.state.Poster}/>
+                                <img alt={"Poster of " + this.state.Title}src ={this.state.Poster}/>
                             </div>
                         </Col>
                         <Col md="6" sm="auto" className="mainContentContainer">
@@ -115,9 +115,9 @@ class Main extends React.Component<IProp,IState>{
                                 <p><b>Title:</b> {this.state.Title}</p>
                                 <p><b>Relese Date: </b>{this.state.Date}</p>
                                 <p><b>Gernes: </b>{this.state.Genres}</p>
-                                <p><b>Length: </b>{this.state.Length}</p>
+                                <p><b>Length: </b>{this.state.Length} mins</p>
                                 <p><b>Favourite: </b>{this.state.isFavourite?"True":"False"}</p>
-                                <p><b>IMDB Link: </b><a href={this.state.Link}>Click here</a> </p>
+                                <p><b>IMDB Link: </b><a href={this.state.Link} className="MainhyperlinkIMBD">Click here</a> </p>
                                 <p><b>Description: </b>{this.state.Description}</p>
                                 
                                 <Dropdown onClick={this.realted}>
