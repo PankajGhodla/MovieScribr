@@ -46,7 +46,7 @@ class MovieList extends React.Component<IProp, IState>{
                                     <Card.Text>
                                     Release Date: {movie.releaseDate.substr(0,10)}
                                     <br/>
-                                    IMDB Link : <a href={movie.imdblink} className="MovieListhyperlinkIMBD">Check here</a>
+                                    IMDB Link : <a href={movie.imdblink} target="_blank" rel="noopener noreferrer" className="MovieListhyperlinkIMBD">Check here</a>
                                     </Card.Text>
                             </Card.Body>
                         </Card>)

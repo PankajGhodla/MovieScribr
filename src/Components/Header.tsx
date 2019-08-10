@@ -1,7 +1,7 @@
 import React from "react";
 import ".././App.css"
 import { Button } from "react-bootstrap";
-//import {Button} from "react-bootstrap"
+
 
 class Header extends React.Component<{},{}>{
     componentDidMount () {
@@ -21,11 +21,10 @@ class Header extends React.Component<{},{}>{
             <nav>
                 
                 <div className="navContainer">
-                    This is a nav bar
+                    <img src={require('../Images/Logo.png')}alt="Logo" className="logo"/>
                     <div id="fb-root"></div>
                     <a className="button" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmovies12.azurewebsites.net%2F&amp;src=sdkpreparse" > <Button variant="primary">Share</Button> </a>
                     <div className="navBtnCollection">
-
                     <div id="ytWidget"></div>
                     </div>
                 </div>

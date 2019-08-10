@@ -14,10 +14,16 @@ body {
   cursor: pointer;
 }
 /*=========== nav ============*/
+.logo {
+  position: absolute;
+  top: -35px;
+  width: 120px;
+
+}
 #ytWidget {
   width: 50px;
   right: 120px;
-  top: -30px;
+  top: -5px;
   overflow: unset;
   z-index: 10000 !important;
   position: absolute;
@@ -86,7 +92,7 @@ nav {
   border-radius: 20px;
 }
 
-img{
+.poster{
   width: 60%;
   min-width: 300px;
   border-radius: 20px;
@@ -109,7 +115,7 @@ img{
   color: rgb(69, 184, 40);
 }
 @media screen and (max-width: 600px) {
-  img{
+  .poster{
     width: 60%;
     min-width: 200px;
     border-radius: 20px;
@@ -194,4 +200,20 @@ th {
       display: table-cell;
   }
 }
+.InputSearchGraphicOne{
+  color: rgb(139, 232, 162);
+}
+.InputSearchGraphicTwo{
+  color: rgb(7, 235, 63);
+  font-size: 1.2em;
+}
 
+/*==================Facebook=================== */
+.loginBtn{
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+.displayText {
+  text-align: center;
+}
