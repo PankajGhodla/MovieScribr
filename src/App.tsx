@@ -33,16 +33,9 @@ class App extends React.Component<{}, IState>{
 
   // This updates the curret movie 
   updateCurrentMovie = (id: string) => {
-    if (this.state.currentMovie === id){
-      this.setState({
-        currentMovie: id
-      })
-    }
-    else{
-      this.setState({
-        currentMovie: id
-      });
-    }
+    this.setState({
+      currentMovie: id
+    }, () => this.setState({currentMovie: id}))
   }
 
   addMovieTODB = (url:String) => {

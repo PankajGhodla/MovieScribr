@@ -20,46 +20,84 @@ class MovieList extends React.Component<IProp, IState>{
         }
         this.updateList();
     }
-    updateList = (inputSearch?: string) => {
-        /**search use */
+    updateList = (inputSearch?: string) => { /**search use */
+        
         if (inputSearch !== undefined && inputSearch !== ""){
             console.log('yes');
-        }
-
-        /** normal use  */
-        fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
-            return res.json();
-        }).then((res:any) => {                        
-            const output:any[] = [];
-            res.forEach((movie:any) => {
-                const movieCard = (
-                    <Card key={movie.movieId} className="MovieListCard"style={{ width: '18rem' }}>
-                    <Delete onClick={()=> this.deleteMovie(movie.movieId)} className="MovieDelete"/>
-                    <span onClick={ ()=> this.handleLike(movie)}className="MovieFav">
-                    {movie.isFavourite === true? <Fav/>: <FavOutline/>}
-                    </span>
-                            <Card.Body>
-                                <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
-                                <Card.Text>
-                                Release Date: {movie.releaseDate.substr(0,10)}
-                                <br/>
-                                IMDB Link : <a href={movie.imdblink}>Check here</a>
-                                </Card.Text>
-                        </Card.Body>
-                    </Card>)
-                    if (movie.isFavourite){
-                        output.unshift(movieCard) // Puts all the favourite movies at the start of the array
-                    }
-                    else{
-                        output.push(movieCard) // Puts all the non favourite movies after the favourite movies in the array 
-                    }
-            });
-            
-            this.setState({
-                movieList: output
+            fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
+                method: 'GET',
+                headers:{
+                    Accept: 'text/plain'
+                }
             })
-        });
-
+            .then((res:any) => {
+            return res.json()
+            }).then((res:any) => {                        
+                const output:any[] = [];
+                res.forEach((movie:any) => {
+                    const movieCard = (
+                        <Card key={movie.movieId} className="MovieListCard"style={{ width: '18rem' }}>
+                        <Delete onClick={()=> this.deleteMovie(movie.movieId)} className="MovieDelete"/>
+                        <span onClick={ ()=> this.handleLike(movie)}className="MovieFav">
+                        {movie.isFavourite === true? <Fav/>: <FavOutline/>}
+                        </span>
+                                <Card.Body>
+                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
+                                    <Card.Text>
+                                    Release Date: {movie.releaseDate.substr(0,10)}
+                                    <br/>
+                                    IMDB Link : <a href={movie.imdblink}>Check here</a>
+                                    </Card.Text>
+                            </Card.Body>
+                        </Card>)
+                        if (movie.isFavourite){
+                            output.unshift(movieCard) // Puts all the favourite movies at the start of the array
+                        }
+                        else{
+                            output.push(movieCard) // Puts all the non favourite movies after the favourite movies in the array 
+                        }
+                });
+                
+                this.setState({
+                    movieList: output
+                })
+            });
+        }
+        else { /** normal use  */
+            
+            fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
+                return res.json();
+            }).then((res:any) => {                        
+                const output:any[] = [];
+                res.forEach((movie:any) => {
+                    const movieCard = (
+                        <Card key={movie.movieId} className="MovieListCard"style={{ width: '18rem' }}>
+                        <Delete onClick={()=> this.deleteMovie(movie.movieId)} className="MovieDelete"/>
+                        <span onClick={ ()=> this.handleLike(movie)}className="MovieFav">
+                        {movie.isFavourite === true? <Fav/>: <FavOutline/>}
+                        </span>
+                                <Card.Body>
+                                    <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
+                                    <Card.Text>
+                                    Release Date: {movie.releaseDate.substr(0,10)}
+                                    <br/>
+                                    IMDB Link : <a href={movie.imdblink}>Check here</a>
+                                    </Card.Text>
+                            </Card.Body>
+                        </Card>)
+                        if (movie.isFavourite){
+                            output.unshift(movieCard) // Puts all the favourite movies at the start of the array
+                        }
+                        else{
+                            output.push(movieCard) // Puts all the non favourite movies after the favourite movies in the array 
+                        }
+                });
+                
+                this.setState({
+                    movieList: output
+                })
+            });
+        }
     }
     //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {

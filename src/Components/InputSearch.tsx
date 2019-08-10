@@ -30,13 +30,22 @@ class InputSearch extends React.Component<IProp,IState>{
     search  = () => {
         console.log(this.state.inputSearch);
         
-        this.props.updateMovieList(this.state.inputSearch)
+        this.props.updateMovieList(this.state.inputSearch.trim())
+        this.setState({
+            inputSearch: ""
+        })
+        console.log('this is a test', this.state.inputSearch);
+        
     }
     
     addUrl = () => {
         console.log(this.state.inputUrl);
+        const input = this.state.inputUrl;
+        this.setState({
+            inputUrl: ""
+        })
         const body ={
-            "url": this.state.inputUrl
+            "url": input
           };
         fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies',{
             method: 'POST',
@@ -45,8 +54,17 @@ class InputSearch extends React.Component<IProp,IState>{
                 'content-type' : 'application/json-patch+json',
                 Accept: 'text/plain'
             }
-        }).then(this.props.updateMovieList)
-        
+        }).then((response:any) =>{
+            if (response.ok) {
+                response.json()
+              } else {
+                throw new Error('Something went wrong');
+              }
+            })
+            .then(this.props.updateMovieList)
+            .catch((error) => {
+                console.log(error)
+              });
     }
     render(){
         return(
@@ -65,6 +83,7 @@ class InputSearch extends React.Component<IProp,IState>{
                     className = "AddUrlBar"
                     placeholder="Add IMDB Url"
                     margin="normal"
+                    value= {this.state.inputUrl}
                     //variant="outlined"
                     onChange = { (event: any ) => this.setState({inputUrl:event.target.value})}
                     
@@ -86,6 +105,7 @@ class InputSearch extends React.Component<IProp,IState>{
                     placeholder="Search here"
                     margin="normal"
                     //variant="outlined"
+                    value = {this.state.inputSearch}
                     onChange = { (event: any ) => this.setState({inputSearch:event.target.value})}
                     
                     InputProps={{

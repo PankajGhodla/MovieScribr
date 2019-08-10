@@ -1,10 +1,11 @@
 import React from "react"
 import ".././App.css"
-import {Container, Row, Col} from "react-bootstrap"
+import {Container, Row, Col, Dropdown} from "react-bootstrap"
 interface IProp {
     currentMovie: string
 }
 interface IState {
+    ID: string,
     Title: string,
     Poster: string,
     Date: string,
@@ -20,6 +21,7 @@ class Main extends React.Component<IProp,IState>{
         super(props)
         
         this.state = {
+            ID: "",
             Title: "",
             Poster: "",
             Date: "",
@@ -30,14 +32,25 @@ class Main extends React.Component<IProp,IState>{
             Related: null,
             isFavourite: false
         }
+        this.display()
+        this.realted()
     }
     componentWillUpdate = () => {
+        console.log('this is it',this.props.currentMovie);
+        
+        if(this.state.ID !== this.props.currentMovie){
+            console.log('display');
+            this.display()   
+        }
+    }
+    display = () => {
         fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + this.props.currentMovie, {
             method: 'GET'
         }).then((res:any) => {
             return res.json();
         }).then((res:any) => {
             this.setState({
+                ID: res.movieId,
                 Title: res.movieTitle,
                 Poster: res.posterUrl,
                 Date: res.releaseDate.substr(0,10),
@@ -51,31 +64,71 @@ class Main extends React.Component<IProp,IState>{
         })
     }
 
+    realted = () => {
+        console.log(this.state.ID);
+        
+        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/RelatedMovies/GetRelatedMovies' + this.state.ID,{
+            method: 'GET',
+            headers:{
+                Accept: 'text/plain'
+            }
+        }).then((response:any) =>{
+            if (response.ok) {
+                return response.json()
+              } else {
+                throw new Error('Something went wrong');
+              }
+            })
+            .then((response:any) =>  {
+                console.log(response);
+                
+                const output :any = []
+                response.forEach((realtedMovie:any)=>{
+                    const movie:any = (<Dropdown.Item href={realtedMovie.relatedImdblink}>{realtedMovie.relatedMovieTitle}</Dropdown.Item>)
+                    output.push(movie)
+                })
+                if (this.state.Related !== output){                    
+                this.setState({
+                    Related: output
+                })
+            }
+        }
+            )
+            .catch((error) => {
+                console.log(error)
+              });
+    }
+
 
     render(){
-        //this.display()
         return(
             <div className="mainContainer">
                 <Container>
                     <Row>
                         <Col md ="6" sm="12" className="mainImgContianer">
                             <div >
-                                <img alt="this is a "src ={this.state.Poster}/>
+                                <img alt='Poster of {this.state.Title}'src ={this.state.Poster}/>
                             </div>
                         </Col>
                         <Col md="6" sm="auto" className="mainContentContainer">
                             <div >
-                                <div className="temp">
-                                <p>Title: {this.state.Title}</p>
-                                <p>Relese Date: {this.state.Date}</p>
-                                <p>Gernes: {this.state.Genres}</p>
-                                <p>Length: {this.state.Length}</p>
-                                <p>Favourite: {this.state.isFavourite?"True":"False"}</p>
-                                <p>IMDB Link: <a href={this.state.Link}>Click here</a> </p>
-                                <p>Description: {this.state.Description}</p>
-                                <p>Related Movies: This is a place holder text thissi si sThis is a place holder text thissi si s</p>
+                                <p><b>Title:</b> {this.state.Title}</p>
+                                <p><b>Relese Date: </b>{this.state.Date}</p>
+                                <p><b>Gernes: </b>{this.state.Genres}</p>
+                                <p><b>Length: </b>{this.state.Length}</p>
+                                <p><b>Favourite: </b>{this.state.isFavourite?"True":"False"}</p>
+                                <p><b>IMDB Link: </b><a href={this.state.Link}>Click here</a> </p>
+                                <p><b>Description: </b>{this.state.Description}</p>
+                                
+                                <Dropdown onClick={this.realted}>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    <b>Related Movies: </b> 
+                                    </Dropdown.Toggle>
 
-                                </div>
+                                    <Dropdown.Menu className="DropdownRelated">
+                                        {this.state.Related}
+                                    </Dropdown.Menu>
+                                    </Dropdown>
                             </div>
                         </Col>
                     </Row>
