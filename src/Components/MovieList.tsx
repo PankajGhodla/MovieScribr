@@ -1,4 +1,5 @@
 import React from "react"
+import ".././App.css"
 import {Card} from "react-bootstrap"
 import {ReactComponent as Delete} from '../Images/baseline-delete-24px.svg'
 import {ReactComponent as Fav} from '../Images/baseline-favorite-24px.svg'
@@ -8,6 +9,7 @@ interface IState {
 }
 interface IProp {
     currentMovie: any
+    getMovieList: any
 }
 
 class MovieList extends React.Component<IProp, IState>{
@@ -18,7 +20,13 @@ class MovieList extends React.Component<IProp, IState>{
         }
         this.updateList();
     }
-    updateList = () => {
+    updateList = (inputSearch?: string) => {
+        /**search use */
+        if (inputSearch !== undefined && inputSearch !== ""){
+            console.log('yes');
+        }
+
+        /** normal use  */
         fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
             return res.json();
         }).then((res:any) => {                        
@@ -31,11 +39,11 @@ class MovieList extends React.Component<IProp, IState>{
                     {movie.isFavourite === true? <Fav/>: <FavOutline/>}
                     </span>
                             <Card.Body>
-                                <Card.Title onClick={() => '21'}>{movie.movieTitle} </Card.Title>
+                                <Card.Title onClick={() => this.updateCurrentMovie(movie.movieId)}>{movie.movieTitle}</Card.Title>
                                 <Card.Text>
                                 Release Date: {movie.releaseDate.substr(0,10)}
                                 <br/>
-                                IMDB Link : <a href={movie.imdblink}>{movie.imdblink}</a>
+                                IMDB Link : <a href={movie.imdblink}>Check here</a>
                                 </Card.Text>
                         </Card.Body>
                     </Card>)
@@ -53,9 +61,9 @@ class MovieList extends React.Component<IProp, IState>{
         });
 
     }
-
+    //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {
-        fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies/' + id, {
+        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
             method: 'DELETE', 
         headers: {
             Accept: 'text/plain'
@@ -63,17 +71,15 @@ class MovieList extends React.Component<IProp, IState>{
             this.updateList()
         })
     }
-
+    // This fix doesn't work for link function. 
     handleLike = (movieObj:any) => {
-        console.log('fav works');
-        
-        const sendThis = [{
+            const sendThis = [{
             "value": !movieObj.isFavourite,
             "path": "/isFavourite",
             "op": "replace",
             "from": ""
           }];
-          fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies/' + movieObj.movieId, {
+          fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
             body: JSON.stringify(sendThis),
             headers: {
                 Accept: 'text/plain',
@@ -84,8 +90,17 @@ class MovieList extends React.Component<IProp, IState>{
         .then(() => this.updateList());
         return null
     }
+
+    componentDidMount = () => {
+        this.props.getMovieList(this.updateList);
+    }
+
+    updateCurrentMovie = (id: string) => {        
+        this.props.currentMovie(id);
+    }
     render(){
         return(
+           
             <div className="MovieListContainer">
             <div className="MovieListCardContainer">
                 {this.state.movieList}

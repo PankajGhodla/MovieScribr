@@ -3,11 +3,17 @@
   padding: 0;
   box-sizing: border-box;
   position: relative;
+  outline: none;
+}
+*:focus {outline:none !important}
+body {
+  background-color: #BFBFBF;
+  min-width: 360px;
 }
 /*=========== nav ============*/
 nav {
   width: 100%;
-  background-color: rgb(44, 44, 43);
+  background-color: #212121;
   color: white;
   padding: 10px;
   position: sticky;
@@ -80,6 +86,8 @@ img{
 
 .MovieListCard{
   margin: 10px auto;
+  background-color: #6B6B6B;
+  color: white;
 }
 .MovieFav{
   position: absolute;
@@ -93,3 +101,33 @@ img{
   top: 3px;
   z-index: 100;
 }
+
+/*=================Input Search=================*/
+.InputSearchTableContainer{
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: #6B6B6B;
+  color: white;
+}
+
+th {
+  text-align: center;
+}
+
+.InputSearchHeading{
+}
+.InputSearchAddMovie{
+}
+.InputSearchSearch{
+} 
+@media screen and (max-width:750px) {
+  table tr > *{
+      display: block;
+  }
+  table tr {
+      display: table-cell;
+  }
+}
+
