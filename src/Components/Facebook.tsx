@@ -22,7 +22,7 @@ class Facebook extends React.Component<{},IState>{
         
     }
     responseFacebook = (respose:any ) =>{
-        //console.log(respose);
+        console.log(respose);
         this.setState({
             isLoggedin: true,
             name: respose.name
@@ -31,7 +31,9 @@ class Facebook extends React.Component<{},IState>{
     render(){
         let fbContent: any
         if (this.state.isLoggedin){
-            return <Combine/>
+            console.log(this.state.name);
+            
+            fbContent = <Combine/>
         }else{
             fbContent = (
                 <div>
@@ -42,17 +44,17 @@ class Facebook extends React.Component<{},IState>{
                         <div className="loginBtn">
                         <FacebookLogin
                             appId="409474863002414"
-                            autoLoad={true}
-                            fields="name"
+                            autoLoad={false}
+                            fields="name,email,picture"
                             onClick={this.componentClicked}
                             callback={this.responseFacebook} 
                         />
                         </div>
                     </div>
                 </div>)
-            return( fbContent)
+            
         }
-        
+    return fbContent
     }
 }
 

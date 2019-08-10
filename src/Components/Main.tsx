@@ -113,7 +113,7 @@ class Main extends React.Component<IProp,IState>{
                         <Col md="6" sm="auto" className="mainContentContainer">
                             <div >
                                 <p><b>Title:</b> {this.state.Title}</p>
-                                <p><b>Relese Date: </b>{this.state.Date}</p>
+                                <p><b>Release Date: </b>{this.state.Date}</p>
                                 <p><b>Gernes: </b>{this.state.Genres}</p>
                                 <p><b>Length: </b>{this.state.Length} mins</p>
                                 <p><b>Favourite: </b>{this.state.isFavourite?"True":"False"}</p>
