@@ -114,7 +114,7 @@ class Main extends React.Component<IProp,IState>{
                             <div >
                                 <p><b>Title:</b> {this.state.Title}</p>
                                 <p><b>Release Date: </b>{this.state.Date}</p>
-                                <p><b>Gernes: </b>{this.state.Genres}</p>
+                                <p><b>Genres: </b>{this.state.Genres}</p>
                                 <p><b>Length: </b>{this.state.Length} mins</p>
                                 <p><b>Favourite: </b>{this.state.isFavourite?"True":"False"}</p>
                                 <p><b>IMDB Link: </b><a href={this.state.Link} target="_blank" rel="noopener noreferrer" className="MainhyperlinkIMBD">Click here</a> </p>

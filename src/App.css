@@ -190,19 +190,23 @@ th {
 }
 .InputSearchAddMovie input{
   color: white !important;
+  opacity: 0.5;
 }
 .InputSearchAddMovie label{
   color: white !important;
+  opacity: 0.5;
 }
 .InputSearchSearch input {
   color: white !important ;
-  border: white;
+  opacity: 0.5;  
 } 
 .InputSearchSearch label {
   color: white !important ;
+  opacity: 0.5;
 } 
 ::placeholder {
   color: white;
+  opacity: 0.1;
 }
 
 @media screen and (max-width:750px) {
