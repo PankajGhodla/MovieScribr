@@ -44,7 +44,7 @@ class App extends React.Component<{}, IState>{
 
   addMovieTODB = (url:String) => {
     const body = {"url": url}
-        fetch('http://movieapiproject.azurewebsites.net/api/Movies', {
+        fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies', {
           body: JSON.stringify(body),
           headers: {
             Accept: "text/plain",

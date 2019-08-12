@@ -23,7 +23,7 @@ class MovieList extends React.Component<IProp, IState>{
     updateList = (inputSearch?: string) => { /**search use */
         
         if (inputSearch !== undefined && inputSearch !== ""){
-            fetch('https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
+            fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
                 method: 'GET',
                 headers:{
                     Accept: 'text/plain'
@@ -65,7 +65,7 @@ class MovieList extends React.Component<IProp, IState>{
         /** https://cors-anywhere.herokuapp.com/ */
         else { /** normal use  */
             
-            fetch('http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
+            fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
                 return res.json();
             }).then((res:any) => {                        
                 const output:any[] = [];
@@ -101,7 +101,7 @@ class MovieList extends React.Component<IProp, IState>{
     }
     //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {
-        fetch('https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
+        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
             method: 'DELETE', 
         headers: {
             Accept: 'text/plain'
@@ -118,7 +118,7 @@ class MovieList extends React.Component<IProp, IState>{
             "op": "replace",
             "from": ""
           }];
-          fetch('https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
+          fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
             body: JSON.stringify(sendThis),
             headers: {
                 Accept: 'text/plain',
