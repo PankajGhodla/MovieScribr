@@ -28,18 +28,13 @@ class InputSearch extends React.Component<IProp,IState>{
     }
 
     search  = () => {
-        console.log(this.state.inputSearch);
-        
         this.props.updateMovieList(this.state.inputSearch.trim())
         this.setState({
             inputSearch: ""
-        })
-        console.log('this is a test', this.state.inputSearch);
-        
+        })        
     }
     
     addUrl = () => {
-        console.log(this.state.inputUrl);
         const input = this.state.inputUrl;
         this.setState({
             inputUrl: ""
@@ -47,7 +42,7 @@ class InputSearch extends React.Component<IProp,IState>{
         const body ={
             "url": input
           };
-        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies',{
+        fetch('https://movieapiproject.azurewebsites.net/api/Movies',{
             method: 'POST',
             body : JSON.stringify(body),
             headers:{

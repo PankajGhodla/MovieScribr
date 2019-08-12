@@ -8,8 +8,8 @@ interface IState {
     movieList: any
 }
 interface IProp {
-    currentMovie: any
-    getMovieList: any
+    currentMovie: any,
+    getMovieList: any,
 }
 
 class MovieList extends React.Component<IProp, IState>{
@@ -23,8 +23,7 @@ class MovieList extends React.Component<IProp, IState>{
     updateList = (inputSearch?: string) => { /**search use */
         
         if (inputSearch !== undefined && inputSearch !== ""){
-            console.log('yes');
-            fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
+            fetch('https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
                 method: 'GET',
                 headers:{
                     Accept: 'text/plain'
@@ -63,9 +62,10 @@ class MovieList extends React.Component<IProp, IState>{
                 })
             });
         }
+        /** https://cors-anywhere.herokuapp.com/ */
         else { /** normal use  */
             
-            fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
+            fetch('http://movieapiproject.azurewebsites.net/api/Movies').then((res:any) => {
                 return res.json();
             }).then((res:any) => {                        
                 const output:any[] = [];
@@ -101,12 +101,13 @@ class MovieList extends React.Component<IProp, IState>{
     }
     //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {
-        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
+        fetch('https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
             method: 'DELETE', 
         headers: {
             Accept: 'text/plain'
         }}).then( () => {
             this.updateList()
+            this.props.currentMovie("");
         })
     }
     // This fix doesn't work for link function. 
@@ -117,7 +118,7 @@ class MovieList extends React.Component<IProp, IState>{
             "op": "replace",
             "from": ""
           }];
-          fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
+          fetch('https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
             body: JSON.stringify(sendThis),
             headers: {
                 Accept: 'text/plain',
@@ -131,6 +132,7 @@ class MovieList extends React.Component<IProp, IState>{
 
     componentDidMount = () => {
         this.props.getMovieList(this.updateList);
+        
     }
 
     updateCurrentMovie = (id: string) => {        

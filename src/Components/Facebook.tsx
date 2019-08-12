@@ -18,11 +18,9 @@ class Facebook extends React.Component<{},IState>{
         }
     }
     componentClicked =() => {
-        console.log('I was clicked');
         
     }
     responseFacebook = (respose:any ) =>{
-        console.log(respose);
         if (respose.name !== undefined){
             this.setState({
                 isLoggedin: true,
@@ -33,7 +31,6 @@ class Facebook extends React.Component<{},IState>{
     render(){
         let fbContent: any
         if (this.state.isLoggedin){
-            console.log(this.state.name);
             
             fbContent = <Combine/>
         }else{
