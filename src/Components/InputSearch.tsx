@@ -42,7 +42,7 @@ class InputSearch extends React.Component<IProp,IState>{
         const body ={
             "url": input
           };
-        fetch('https://movieapiproject.azurewebsites.net/api/Movies',{
+        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies',{
             method: 'POST',
             body : JSON.stringify(body),
             headers:{
