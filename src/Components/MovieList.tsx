@@ -23,8 +23,7 @@ class MovieList extends React.Component<IProp, IState>{
     updateList = (inputSearch?: string) => { /**search use */
         
         if (inputSearch !== undefined && inputSearch !== ""){
-            fetch('https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
-                credentials: 'include',
+            fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/SearchByMovie/' + inputSearch, {
                 method: 'GET',
                 headers:{
                     Accept: 'text/plain'
@@ -66,7 +65,7 @@ class MovieList extends React.Component<IProp, IState>{
         /** https://cors-anywhere.herokuapp.com/ */
         else { /** normal use  */
             
-            fetch('http://movieapiproject.azurewebsites.net/api/Movies', {
+            fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies', {
                 credentials: 'include'
             }).then((res:any) => {
                 return res.json();
@@ -104,7 +103,7 @@ class MovieList extends React.Component<IProp, IState>{
     }
     //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {
-        fetch('https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
+        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
             credentials: 'include',    
             method: 'DELETE', 
             headers: {
@@ -122,7 +121,7 @@ class MovieList extends React.Component<IProp, IState>{
             "op": "replace",
             "from": ""
           }];
-          fetch('https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
+          fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/update/' + movieObj.movieId, {
             credentials: 'include',
             body: JSON.stringify(sendThis),
             headers: {
