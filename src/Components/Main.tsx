@@ -42,7 +42,8 @@ class Main extends React.Component<IProp,IState>{
         }
     }
     componentDidMount = () => {
-        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies', {
+        fetch('https://movieapiproject.azurewebsites.net/api/Movies', {
+            credentials: 'include',
             method: 'GET',
             headers: {
               Accept: 'text/plain'
@@ -57,7 +58,8 @@ class Main extends React.Component<IProp,IState>{
     }
 
     display = (current: any) => {
-        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + current, {
+        fetch('https://movieapiproject.azurewebsites.net/api/Movies/' + current, {
+            credentials: 'include',
             method: 'GET'
         }).then((res:any) => {
             return res.json();
@@ -83,7 +85,8 @@ class Main extends React.Component<IProp,IState>{
     }
 
     realted = () => {        
-        fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/RelatedMovies/GetRelatedMovies' + this.state.ID,{
+        fetch('https://movieapiproject.azurewebsites.net/api/RelatedMovies/GetRelatedMovies' + this.state.ID,{
+            credentials: 'include',
             method: 'GET',
             headers:{
                 Accept: 'text/plain'
