@@ -7,19 +7,20 @@ import InputSearch from "./InputSearch"
 
 
 interface IState {
-  hubConnection: any,
+  //hubConnection: any,
   updateListMethod: any,
   List: any,
   currentMovie: any,
+  count: number,
 }
 
 class App extends React.Component<{}, IState>{
-  public signalR = require("@aspnet/signalr");
+ // public signalR = require("@aspnet/signalr");
   constructor(props: any){
     super(props)
     this.state = {
-      hubConnection: new this.signalR.HubConnectionBuilder().withUrl("https://movieapiproject.azurewebsites.net/hub").build(),
-
+      //hubConnection: new this.signalR.HubConnectionBuilder().withUrl("https://movieapiproject.azurewebsites.net/hub", {credentials: 'include' }).build(),
+      count: 0,
       updateListMethod: null,
       List: [],
       currentMovie: "",
@@ -42,6 +43,21 @@ class App extends React.Component<{}, IState>{
     }, () => this.setState({currentMovie: id}))
   }
 
+  //SignalR
+  CountMethod = () => {
+    const temp = this.state.count
+    this.setState({
+      count: temp + 1
+    })
+    console.log('prints the count number');
+    
+    console.log(this.state.count);
+    
+  }
+  addMovieMethod = (url: string) => {
+    this.addMovieTODB(url);
+  }
+
   addMovieTODB = (url:String) => {
     const body = {"url": url}
         fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies', {
@@ -54,26 +70,28 @@ class App extends React.Component<{}, IState>{
         }).then((res:any) => {
           this.state.updateListMethod(); //This will update the movie list when we add a movie
           //Update the video list
-        }).then(() => {
-          console.log('this works');
-          this.state.hubConnection.invoke("MovieAdded")
-       });
+        })
+      //   .then(() => {
+      //     console.log('this works');
+      //     this.state.hubConnection.invoke("MovieAdded")
+      //  });
 
 }
+
 //Signal R
-public componentDidMount = () => {
+// public componentDidMount = () => {
 
-  this.state.hubConnection.on("Connect", ()  => {
-    console.log('A new user has connected to the hub.');
-  });
+//   this.state.hubConnection.on("Connect", ()  => {
+//     console.log('A new user has connected to the hub.');
+//   });
   
-  this.state.hubConnection.on("UpdateMovieList", ()  => {
-    this.state.updateListMethod();
-    console.log('A new video has been added!');
-});
+//   this.state.hubConnection.on("UpdateMovieList", ()  => {
+//     this.state.updateListMethod();
+//     console.log('A new video has been added!');
+// });
 
-  this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
-}
+//   this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+// }
 
   render(){
     return(
@@ -81,8 +99,8 @@ public componentDidMount = () => {
       
         <div>
         <Header/>
-        <Main currentMovie={this.state.currentMovie}/>
-        <InputSearch updateMovieList= {this.state.updateListMethod} />
+        <Main currentMovie={this.state.currentMovie} count={this.state.count}/>
+        <InputSearch CountMethod={this.CountMethod} updateMovieList= {this.state.updateListMethod} />
         <MovieList currentMovie={this.updateCurrentMovie} getMovieList={this.movieListFromChild}/>
         <br/>
         <br/>

@@ -1,10 +1,13 @@
 import React from "react"
 import ".././App.css"
 import {Container, Row, Col, Dropdown} from "react-bootstrap"
+import {ReactComponent as Perosn} from "../Images/baseline-person-24px.svg"
 interface IProp {
-    currentMovie: string
+    currentMovie: string,
+    count: any
 }
 interface IState {
+    count: number,
     ID: string,
     Title: string,
     Poster: string,
@@ -21,6 +24,7 @@ class Main extends React.Component<IProp,IState>{
         super(props)
         
         this.state = {
+            count: 0,
             ID: "",
             Title: "",
             Poster: "",
@@ -127,6 +131,10 @@ class Main extends React.Component<IProp,IState>{
                         </Col>
                         <Col md="6" sm="auto" className="mainContentContainer">
                             <div >
+                                <div className="MainPersonSignalR">
+                                    {this.props.count}
+                                    <Perosn />
+                                </div>
                                 <p><b>Title:</b> {this.state.Title || 'Title of the movie goes here.'}</p>
                                 <p><b>Release Date: </b>{this.state.Date || 'Release date of the movie goes here. '}</p>
                                 <p><b>Genres: </b>{this.state.Genres || 'Generes of the movie goes here.'}</p>

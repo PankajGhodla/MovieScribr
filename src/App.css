@@ -114,6 +114,11 @@ nav {
 .MainhyperlinkIMBD:hover{
   color: rgb(69, 184, 40);
 }
+.MainPersonSignalR{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 @media screen and (max-width: 600px) {
   .poster{
     width: 60%;

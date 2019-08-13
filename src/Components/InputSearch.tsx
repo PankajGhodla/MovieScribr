@@ -7,19 +7,25 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import AddCircle from '@material-ui/icons/AddCircle'
 
 interface IState {
+    hubConnection: any,
     inputSearch: string,
     inputUrl: string,
     result: any,
     body:any,
+    
 }
 interface IProp {
-    updateMovieList: any
+    updateMovieList: any,
+    CountMethod: any
 }
 
 class InputSearch extends React.Component<IProp,IState>{
+    public signalR = require("@aspnet/signalr");
     constructor(props:any){
         super(props)
         this.state = {
+            hubConnection: new this.signalR.HubConnectionBuilder().withUrl("https://movieapiproject.azurewebsites.net/hub", {credentials: 'include' }).build(),
+
             inputSearch: "",
             inputUrl: "",
             result: null,
@@ -56,12 +62,33 @@ class InputSearch extends React.Component<IProp,IState>{
                 throw new Error('Something went wrong');
               }
             })
-            .then(this.props.updateMovieList)
-            .catch((error) => {
+            .then( () =>{
+                this.props.updateMovieList()
+                console.log('this works');
+                this.state.hubConnection.invoke("MovieAdded")
+            } )
+            .catch((error:any) => {
                 console.log(error)
               });
     }
+
+   
     
+    //Signal R
+    public componentDidMount = () => {
+
+        this.state.hubConnection.on("Connect", ()  => {
+        this.props.CountMethod();
+        console.log('A new user has connected to the hub.');
+        });
+        
+        this.state.hubConnection.on("UpdateMovieList", ()  => {
+        this.props.updateMovieList();
+        console.log('A new video has been added!');
+    });
+    
+        this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+    }
     render(){
         return(
             <div className="InputSearchContainer">
