@@ -22,7 +22,7 @@ class App extends React.Component<{}, IState>{
 
       updateListMethod: null,
       List: [],
-      currentMovie: 7,
+      currentMovie: "",
     }   
   }
 
@@ -54,25 +54,26 @@ class App extends React.Component<{}, IState>{
         }).then((res:any) => {
           this.state.updateListMethod(); //This will update the movie list when we add a movie
           //Update the video list
-        })
-        //.then(() => {this.state.hubConnection.invoke("MovieAdded")
-       //});
+        }).then(() => {
+          console.log('this works');
+          this.state.hubConnection.invoke("MovieAdded")
+       });
 
 }
 //Signal R
-// public componentDidMount = () => {
+public componentDidMount = () => {
 
-//   this.state.hubConnection.on("Connect", ()  => {
-//     console.log('A new user has connected to the hub.');
-//   });
+  this.state.hubConnection.on("Connect", ()  => {
+    console.log('A new user has connected to the hub.');
+  });
+  
+  this.state.hubConnection.on("UpdateMovieList", ()  => {
+    this.state.updateListMethod();
+    console.log('A new video has been added!');
+});
 
-//   this.state.hubConnection.on("UpdateMovieList", ()  => {
-//     this.state.updateListMethod();
-//     console.log('A new video has been added!');
-// });
-
-//   this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
-// }
+  this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+}
 
   render(){
     return(

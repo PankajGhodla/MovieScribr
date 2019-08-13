@@ -33,7 +33,6 @@ class Main extends React.Component<IProp,IState>{
             isFavourite: false
         }
         this.display(this.props.currentMovie)
-        this.realted()
     }
     componentWillUpdate = () => {
         
@@ -63,6 +62,7 @@ class Main extends React.Component<IProp,IState>{
         }).then((res:any) => {
             return res.json();
         }).then((res:any) => {
+            if(res.releaseDate !== undefined){
             this.setState({
                 ID: res.movieId,
                 Title: res.movieTitle,
@@ -74,10 +74,12 @@ class Main extends React.Component<IProp,IState>{
                 Genres: res.genres,
                 Related: null,
                 isFavourite: res.isFavourite
-            })
+            });
+        }
         }).catch((error) => {
             console.log(error)
           });
+        
     }
 
     realted = () => {        
@@ -95,8 +97,8 @@ class Main extends React.Component<IProp,IState>{
             })
             .then((response:any) =>  {                
                 const output :any = []
-                response.forEach((realtedMovie:any)=>{
-                    const movie:any = (<Dropdown.Item target="_blank" rel="noopener noreferrer" href={realtedMovie.relatedImdblink}>{realtedMovie.relatedMovieTitle}</Dropdown.Item>)
+                response.forEach((relatedMovie:any)=>{
+                    const movie:any = (<Dropdown.Item target="_blank" key={relatedMovie.realtedMovieId} rel="noopener noreferrer" href={relatedMovie.relatedImdblink}>{relatedMovie.relatedMovieTitle}</Dropdown.Item>)
                     output.push(movie)
                 })
                 if (this.state.Related !== output){                    
