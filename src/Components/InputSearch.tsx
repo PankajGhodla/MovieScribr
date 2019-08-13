@@ -16,7 +16,8 @@ interface IState {
 }
 interface IProp {
     updateMovieList: any,
-    CountMethod: any
+    CountMethod: any,
+    updateDeletedMovie:any
 }
 
 class InputSearch extends React.Component<IProp,IState>{
@@ -64,7 +65,6 @@ class InputSearch extends React.Component<IProp,IState>{
             })
             .then( () =>{
                 this.props.updateMovieList()
-                console.log('this works');
                 this.state.hubConnection.invoke("MovieAdded")
             } )
             .catch((error:any) => {
@@ -79,15 +79,20 @@ class InputSearch extends React.Component<IProp,IState>{
 
         this.state.hubConnection.on("Connect", ()  => {
         this.props.CountMethod();
-        console.log('A new user has connected to the hub.');
         });
         
         this.state.hubConnection.on("UpdateMovieList", ()  => {
         this.props.updateMovieList();
-        console.log('A new video has been added!');
     });
-    
+        this.props.updateDeletedMovie(this.update)
         this.state.hubConnection.start().then(() => this.state.hubConnection.invoke("BroadcastMessage"));
+    }
+
+    update = () => {
+        this.state.hubConnection.on("UpdateMovieList", ()  => {
+            this.props.updateMovieList();
+        });
+        this.state.hubConnection.invoke("MovieAdded")
     }
     render(){
         return(

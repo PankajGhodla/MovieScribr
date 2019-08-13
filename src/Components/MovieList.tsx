@@ -10,6 +10,7 @@ interface IState {
 interface IProp {
     currentMovie: any,
     getMovieList: any,
+    deletedMovie: any
 }
 
 class MovieList extends React.Component<IProp, IState>{
@@ -60,7 +61,7 @@ class MovieList extends React.Component<IProp, IState>{
                 this.setState({
                     movieList: output
                 })
-            });
+            })
         }
         /** https://cors-anywhere.herokuapp.com/ */
         else { /** normal use  */
@@ -97,9 +98,10 @@ class MovieList extends React.Component<IProp, IState>{
                 this.setState({
                     movieList: output
                 })
-            });
+            })
         }
     }
+
     //This is the fix I found online, i.e., add https://cors-anywhere.herokuapp.com/ beofre the api call. 
     deleteMovie = (id: any) => {
         fetch('https://cors-anywhere.herokuapp.com/https://movieapiproject.azurewebsites.net/api/Movies/' + id, {
@@ -109,7 +111,8 @@ class MovieList extends React.Component<IProp, IState>{
             }}).then( () => {
                 this.updateList()
                 this.props.currentMovie("");
-            })
+            }).then(this.props.deletedMovie())
+        
     }
     // This fix doesn't work for link function. 
     handleLike = (movieObj:any) => {
@@ -127,8 +130,8 @@ class MovieList extends React.Component<IProp, IState>{
             },
             method: 'PATCH'
         })
-        .then(() => this.updateList());
-        return null
+        .then(() => this.updateList())
+        .then(this.props.deletedMovie);
     }
 
     componentDidMount = () => {

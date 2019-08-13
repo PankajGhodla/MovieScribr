@@ -12,6 +12,7 @@ interface IState {
   List: any,
   currentMovie: any,
   count: number,
+  deletedMovie: any
 }
 
 class App extends React.Component<{}, IState>{
@@ -24,6 +25,7 @@ class App extends React.Component<{}, IState>{
       updateListMethod: null,
       List: [],
       currentMovie: "",
+      deletedMovie: null
     }   
   }
 
@@ -48,11 +50,7 @@ class App extends React.Component<{}, IState>{
     const temp = this.state.count
     this.setState({
       count: temp + 1
-    })
-    console.log('prints the count number');
-    
-    console.log(this.state.count);
-    
+    })    
   }
   addMovieMethod = (url: string) => {
     this.addMovieTODB(url);
@@ -78,6 +76,11 @@ class App extends React.Component<{}, IState>{
 
 }
 
+updateDeletedMovie = (callback: any) => {
+  this.setState({
+    deletedMovie: callback
+  })
+}
 //Signal R
 // public componentDidMount = () => {
 
@@ -100,8 +103,8 @@ class App extends React.Component<{}, IState>{
         <div>
         <Header/>
         <Main currentMovie={this.state.currentMovie} count={this.state.count}/>
-        <InputSearch CountMethod={this.CountMethod} updateMovieList= {this.state.updateListMethod} />
-        <MovieList currentMovie={this.updateCurrentMovie} getMovieList={this.movieListFromChild}/>
+        <InputSearch updateDeletedMovie={this.updateDeletedMovie}CountMethod={this.CountMethod} updateMovieList= {this.state.updateListMethod} />
+        <MovieList deletedMovie={this.state.deletedMovie}currentMovie={this.updateCurrentMovie} getMovieList={this.movieListFromChild}/>
         <br/>
         <br/>
         <br/>
