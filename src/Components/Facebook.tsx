@@ -21,7 +21,7 @@ class Facebook extends React.Component<{},IState>{
         
     }
     responseFacebook = (respose:any ) =>{
-        if (respose.name !== undefined){
+        if (respose.name === undefined){
             this.setState({
                 isLoggedin: true,
                 name: respose.name
