@@ -31,6 +31,7 @@ class Header extends React.Component<{},{}>{
                     <div className="button">
                         <div className="fb-like" data-href="https://movies12.azurewebsites.net" data-width="30" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
                     </div>
+                    {/*<a className="button" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmovies12.azurewebsites.net%2F&amp;src=sdkpreparse" > <Button variant="primary">Share</Button> </a>*/}
                     <div className="navBtnCollection">
                     <div id="ytWidget"></div>
                     </div>
