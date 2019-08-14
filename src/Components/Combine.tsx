@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import '../App.css';
 import Header from "./Header";
@@ -52,29 +53,29 @@ class App extends React.Component<{}, IState>{
       count: temp + 1
     })    
   }
-  addMovieMethod = (url: string) => {
-    this.addMovieTODB(url);
-  }
+//   addMovieMethod = (url: string) => {
+//     this.addMovieTODB(url);
+//   }
 
-  addMovieTODB = (url:String) => {
-    const body = {"url": url}
-        fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies', {
-          body: JSON.stringify(body),
-          headers: {
-            Accept: "text/plain",
-            'Content-type': 'applicaton/json-patch+json'
-          },
-          method: 'POST'
-        }).then((res:any) => {
-          this.state.updateListMethod(); //This will update the movie list when we add a movie
-          //Update the video list
-        })
-      //   .then(() => {
-      //     console.log('this works');
-      //     this.state.hubConnection.invoke("MovieAdded")
-      //  });
+//   addMovieTODB = (url:String) => {
+//     const body = {"url": url}
+//         fetch('https://cors-anywhere.herokuapp.com/http://movieapiproject.azurewebsites.net/api/Movies', {
+//           body: JSON.stringify(body),
+//           headers: {
+//             Accept: "text/plain",
+//             'Content-type': 'applicaton/json-patch+json'
+//           },
+//           method: 'POST'
+//         }).then((res:any) => {
+//           this.state.updateListMethod(); //This will update the movie list when we add a movie
+//           //Update the video list
+//         })
+//       //   .then(() => {
+//       //     console.log('this works');
+//       //     this.state.hubConnection.invoke("MovieAdded")
+//       //  });
 
-}
+// }
 
 updateDeletedMovie = (callback: any) => {
   this.setState({

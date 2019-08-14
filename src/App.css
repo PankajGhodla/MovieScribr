@@ -8,7 +8,7 @@
 *:focus {outline:none !important}
 body {
   background-color: #333333;
-  min-width: 450px;
+  min-width: 500px;
 }
 .pointer {
   cursor: pointer;
@@ -40,17 +40,15 @@ body {
   max-width: 300px;
   z-index: 1000000;
 }
+
 .button {
   position: absolute;
   right: 200px;
-  top: -2px;
+  top: 5px;
   color: white !important;
   background-color: transparent !important;
 }
-.button a {
-  display: block;
-  width: 100%;
-}
+
 nav {
   width: 100%;
   background-color: #212121;

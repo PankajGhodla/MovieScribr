@@ -1,6 +1,6 @@
 import React from "react";
 import ".././App.css"
-import { Button } from "react-bootstrap";
+//import { Button } from "react-bootstrap";
 
 
 class Header extends React.Component<{},{}>{
@@ -14,6 +14,11 @@ class Header extends React.Component<{},{}>{
         script.src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"
         script.async = true;
         document.body.appendChild(script);
+
+        script.src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=409474863002414&autoLogAppEvents=1"
+        script.async = true;
+        document.body.appendChild(script);
+
     }
     render(){
 
@@ -23,7 +28,9 @@ class Header extends React.Component<{},{}>{
                 <div className="navContainer">
                     <img src={require('../Images/Logo.png')}alt="Logo" className="logo"/>
                     <div id="fb-root"></div>
-                    <a className="button" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmovies12.azurewebsites.net%2F&amp;src=sdkpreparse" > <Button variant="primary">Share</Button> </a>
+                    <div className="button">
+                        <div className="fb-like" data-href="https://movies12.azurewebsites.net" data-width="30" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+                    </div>
                     <div className="navBtnCollection">
                     <div id="ytWidget"></div>
                     </div>
