@@ -43,10 +43,9 @@ body {
 
 .button {
   position: absolute;
-  right: 200px;
+  right: 230px;
   top: 5px;
-  color: white !important;
-  background-color: transparent !important;
+  width: 100px;
 }
 /*
 .button a {
