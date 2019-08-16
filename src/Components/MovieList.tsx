@@ -57,7 +57,13 @@ class MovieList extends React.Component<IProp, IState>{
                             output.push(movieCard) // Puts all the non favourite movies after the favourite movies in the array 
                         }
                 });
-                
+                let temp: any
+                if (output.length === 0){
+                    temp = (<div key={1} className="noSearchResult">No search result(s) found!</div>)
+                    output.push(temp)
+                }
+                temp = (<div key={2} className="noSearchResult">Please click the search button to view all the movies.</div>)
+                output.push(temp)
                 this.setState({
                     movieList: output
                 })
@@ -156,3 +162,5 @@ class MovieList extends React.Component<IProp, IState>{
 }
 
 export default MovieList
+
+

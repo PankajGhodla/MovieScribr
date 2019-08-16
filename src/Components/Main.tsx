@@ -126,7 +126,7 @@ class Main extends React.Component<IProp,IState>{
                     <Row>
                         <Col md ="6" sm="12" className="mainImgContianer">
                             <div >
-                                <img className="poster"alt={"Poster of " + this.state.Title}src ={this.state.Poster || 'http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png'}/>
+                                <img className="poster"alt={"Poster of " + this.state.Title}src ={ this.state.Poster ||require('../Images/Poster.png')}/>
                             </div>
                         </Col>
                         <Col md="6" sm="auto" className="mainContentContainer">

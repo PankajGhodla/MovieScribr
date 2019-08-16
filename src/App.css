@@ -176,6 +176,14 @@ nav {
 .MovieListhyperlinkIMBD:hover{
   color: rgb(69, 184, 40);
 }
+.noSearchResult{
+  margin: auto;
+  color: white;
+  font-size: 1.5em;
+  text-align: center;
+  display: block !important;
+  width: 100%;
+}
 /*=================Input Search=================*/
 .InputSearchTableContainer{
   width: 100%;
